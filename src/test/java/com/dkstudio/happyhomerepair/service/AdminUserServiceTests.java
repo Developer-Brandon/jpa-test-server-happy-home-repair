@@ -30,7 +30,7 @@ public class AdminUserServiceTests {
     private AdminUserRepository adminUserRepository;
 
     @Before
-    public void init() {
+    public void 초기화() {
         MockitoAnnotations.initMocks(this);
         adminUserService = new AdminUserService(adminUserRepository);
     }
@@ -107,7 +107,38 @@ public class AdminUserServiceTests {
     }
 
     @Test
-    public void 어드민_유저_수정_테스트() {
+    public void 어드민_유저_정보_수정_테스트() {
+        AdminUser mockAdminUser = AdminUser.builder()
+                .id(0L)
+                .account("brandon@naver.com")
+                .password("asd1234!")
+                .name("BrandonLee")
+                .status(AdminUserState.ACTIVE)
+                .role(AdminUserRole.SUPER)
+                .lastLoginAt(LocalDateTime.now())
+                .loginFailCount(0)
+                .registeredAt(LocalDateTime.now())
+                .build();
+
+
+        given(adminUserRepository
+                .findById(0L))
+                .willReturn(Optional.of(mockAdminUser));
+
+        adminUserService.updateInformation(
+                0L,
+                "BruceLee",
+                AdminUserState.ACTIVE,
+                AdminUserRole.SUPER
+        );
+
+        assertThat(mockAdminUser.getName(), is("BruceLee"));
+        assertThat(mockAdminUser.getStatus(), is(AdminUserState.ACTIVE));
+        assertThat(mockAdminUser.getRole(), is(AdminUserRole.SUPER));
+    }
+
+    @Test
+    public void 어드민_유저_이메일_수정_테스트() {
 
     }
 }

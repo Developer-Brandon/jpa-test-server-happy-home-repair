@@ -2,10 +2,7 @@ package com.dkstudio.happyhomerepair.model.entity;
 
 import com.dkstudio.happyhomerepair.model.enums.AdminUserRole;
 import com.dkstudio.happyhomerepair.model.enums.AdminUserState;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -18,6 +15,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -25,6 +23,7 @@ import java.time.LocalDateTime;
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(exclude = {"noticeList", "blogPostList"})
 @EntityListeners(AuditingEntityListener.class)
 public class AdminUser {
     @Id
@@ -72,4 +71,11 @@ public class AdminUser {
 
     @LastModifiedBy
     private String updatedBy;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "adminUser")
+    private List<Notice> noticeList;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "adminUser")
+    private List<BlogPost> blogPostList;
+
 }

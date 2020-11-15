@@ -1,9 +1,6 @@
 package com.dkstudio.happyhomerepair.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -19,6 +16,7 @@ import java.time.LocalDateTime;
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(exclude = {"adminUser"})
 @EntityListeners(AuditingEntityListener.class)
 public class BlogPost {
     @Id
@@ -41,5 +39,7 @@ public class BlogPost {
     @CreatedBy
     private String createdBy;
 
-    private Long adminUserId;
+    // private Long adminUserId;
+    @ManyToOne
+    private AdminUser adminUser;
 }

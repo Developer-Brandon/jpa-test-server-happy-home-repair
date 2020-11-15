@@ -78,7 +78,7 @@ public class AdminUserServiceTests {
     }
 
     @Test
-    public void 어드민_모든_유저_읽기_테스트() {
+    public void 어드민_모든_유저_읽기_존재할_경우_테스트() {
         AdminUser mockAdminUser = AdminUser.builder()
                 .id(0L)
                 .account("brandon@naver.com")
@@ -107,7 +107,16 @@ public class AdminUserServiceTests {
     }
 
     @Test
-    public void 어드민_유저_정보_수정_테스트() {
+    public void 어드민_모든_유저_읽기_존재하지_않을_경우_테스트() {
+        List<AdminUser> adminUserList = adminUserRepository.findAll();
+
+        List<AdminUser> emptyAdminUserList = new ArrayList<>();
+
+        assertThat(adminUserList, is(emptyAdminUserList)) ;
+    }
+
+    @Test
+    public void 어드민_유저_정보_수정_성공_할_경우_테스트() {
         AdminUser mockAdminUser = AdminUser.builder()
                 .id(0L)
                 .account("brandon@naver.com")
@@ -121,9 +130,8 @@ public class AdminUserServiceTests {
                 .build();
 
 
-        given(adminUserRepository
-                .findById(0L))
-                .willReturn(Optional.of(mockAdminUser));
+        given(adminUserRepository.findById(any()))
+                .willReturn(Optional.ofNullable(mockAdminUser));
 
         adminUserService.updateInformation(
                 0L,
@@ -138,7 +146,126 @@ public class AdminUserServiceTests {
     }
 
     @Test
-    public void 어드민_유저_이메일_수정_테스트() {
+    public void 어드민_유저_정보_수정_실패_할_경우_테스트() {
+        AdminUser mockAdminUser = AdminUser.builder()
+                .id(0L)
+                .account("brandon@naver.com")
+                .password("asd1234!")
+                .name("BrandonLee")
+                .status(AdminUserState.ACTIVE)
+                .role(AdminUserRole.SUPER)
+                .lastLoginAt(LocalDateTime.now())
+                .loginFailCount(0)
+                .registeredAt(LocalDateTime.now())
+                .build();
 
+
+        given(adminUserRepository.findById(0L))
+                .willReturn(Optional.ofNullable(mockAdminUser));
+
+        adminUserService.updateInformation(
+                1L,
+                "BruceLee",
+                AdminUserState.ACTIVE,
+                AdminUserRole.SUPER
+        );
+
+        assertThat(mockAdminUser.getName(), is("BruceLee"));
+        assertThat(mockAdminUser.getStatus(), is(AdminUserState.ACTIVE));
+        assertThat(mockAdminUser.getRole(), is(AdminUserRole.SUPER));
+    }
+
+    @Test
+    public void 어드민_유저_이메일_수정_성공_테스트() {
+        AdminUser mockAdminUser = AdminUser.builder()
+                .id(0L)
+                .account("brandon@naver.com")
+                .password("asd1234!")
+                .name("BrandonLee")
+                .status(AdminUserState.ACTIVE)
+                .role(AdminUserRole.SUPER)
+                .lastLoginAt(LocalDateTime.now())
+                .loginFailCount(0)
+                .registeredAt(LocalDateTime.now())
+                .build();
+
+        given(adminUserRepository.findById(0L))
+                .willReturn(Optional.ofNullable(mockAdminUser));
+
+        adminUserService.updateAccount(
+                0L,
+                "singLung"
+        );
+
+        assertThat(mockAdminUser.getAccount(), is("singLung"));
+    }
+
+    @Test
+    public void 어드민_유저_이메일_수정_실패_테스트() {
+        AdminUser mockAdminUser = AdminUser.builder()
+                .id(0L)
+                .account("brandon@naver.com")
+                .password("asd1234!")
+                .name("BrandonLee")
+                .status(AdminUserState.ACTIVE)
+                .role(AdminUserRole.SUPER)
+                .lastLoginAt(LocalDateTime.now())
+                .loginFailCount(0)
+                .registeredAt(LocalDateTime.now())
+                .build();
+
+        given(adminUserRepository.findById(0L))
+                .willReturn(Optional.ofNullable(mockAdminUser));
+
+        adminUserService.updateAccount(
+                1L,
+                "singLung"
+        );
+
+        assertThat(mockAdminUser.getAccount(), is("singLung"));
+    }
+
+    @Test
+    public void 어드민_유저_비활성화_성공_테스트() {
+        AdminUser mockAdminUser = AdminUser.builder()
+                .id(0L)
+                .account("brandon@naver.com")
+                .password("asd1234!")
+                .name("BrandonLee")
+                .status(AdminUserState.ACTIVE)
+                .role(AdminUserRole.SUPER)
+                .lastLoginAt(LocalDateTime.now())
+                .loginFailCount(0)
+                .registeredAt(LocalDateTime.now())
+                .build();
+
+        given(adminUserRepository.findById(any()))
+                .willReturn(Optional.ofNullable(mockAdminUser));
+
+        AdminUser inActivedUser = adminUserService.inactiveUser(0L);
+
+        assertThat(inActivedUser.getStatus(), is(AdminUserState.INACTIVE));
+    }
+
+    @Test
+    public void 어드민_유저_비활성화_실패_테스트() {
+        AdminUser mockAdminUser = AdminUser.builder()
+                .id(0L)
+                .account("brandon@naver.com")
+                .password("asd1234!")
+                .name("BrandonLee")
+                .status(AdminUserState.ACTIVE)
+                .role(AdminUserRole.SUPER)
+                .lastLoginAt(LocalDateTime.now())
+                .loginFailCount(0)
+                .registeredAt(LocalDateTime.now())
+                .build();
+
+        given(adminUserRepository.findById(0L))
+                .willReturn(Optional.ofNullable(mockAdminUser));
+
+        AdminUser inActivedUser = adminUserService.inactiveUser(1L);
+
+        assertThat(inActivedUser.getStatus(), is(AdminUserState.INACTIVE));
     }
 }

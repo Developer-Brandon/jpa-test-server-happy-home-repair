@@ -15,7 +15,9 @@ import java.util.Optional;
 @Service
 public class AdminUserService {
 
-    AdminUserRepository adminUserRepository;
+    private AdminUserRepository adminUserRepository;
+
+    private String ADMIN_NAME = "SUPER_ADMIN";
 
     @Autowired
     public AdminUserService(AdminUserRepository adminUserRepository) {
@@ -47,10 +49,9 @@ public class AdminUserService {
                             .setStatus(adminUserState)
                             .setRole(adminUserRole)
                             .setUpdatedAt(LocalDateTime.now())
-                            .setUpdatedBy("SuperAdmin");
+                            .setUpdatedBy(ADMIN_NAME);
                     return adminUserEntity;
                 })
-                .map(newAdminUser -> adminUserRepository.save(newAdminUser))
                 .orElseThrow(() -> new AdminUserNotFoundException(adminUserId));
     }
 
@@ -63,10 +64,23 @@ public class AdminUserService {
                     adminUserEntity
                             .setAccount(adminUserAccount)
                             .setUpdatedAt(LocalDateTime.now())
-                            .setUpdatedBy("SuperAdmin");
+                            .setUpdatedBy(ADMIN_NAME);
                     return adminUserEntity;
                 })
-                .map(newAdminUser -> adminUserRepository.save(newAdminUser))
+                .orElseThrow(() -> new AdminUserNotFoundException(adminUserId));
+    }
+
+    public AdminUser inactiveUser(
+            Long adminUserId
+    ) {
+        return adminUserRepository.findById(adminUserId)
+                .map(adminUserEntity -> {
+                    adminUserEntity
+                            .setStatus(AdminUserState.INACTIVE)
+                            .setUpdatedAt(LocalDateTime.now())
+                            .setUpdatedBy(ADMIN_NAME);
+                    return adminUserEntity;
+                })
                 .orElseThrow(() -> new AdminUserNotFoundException(adminUserId));
     }
 }

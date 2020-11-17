@@ -1,8 +1,12 @@
 package com.dkstudio.happyhomerepair.controller;
 
 import com.dkstudio.happyhomerepair.model.entity.AdminUser;
+import com.dkstudio.happyhomerepair.model.network.request.AdminUserApiRequest;
 import com.dkstudio.happyhomerepair.service.AdminUserService;
+import com.sun.jndi.toolkit.url.Uri;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +15,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @CrossOrigin
 @RestController
 @RequestMapping("/api/admin")
@@ -20,31 +25,50 @@ public class AdminUserController {
     AdminUserService adminUserService;
 
     @PostMapping
-    public ResponseEntity<?> createUser(
-        @RequestBody AdminUser adminUser
+    public ResponseEntity<?> createAdminUser(
+            @RequestBody AdminUserApiRequest request
     ) throws URISyntaxException {
-        AdminUser newAdminUser= adminUserService.createAdminUser(adminUser);
+
+        AdminUser newAdminUser = adminUserService.createAdminUser(
+                request.getEmail(),
+                request.getPassword(),
+                request.getName()
+        );
+
         String url = "/api/admin" + newAdminUser.getId();
-        return ResponseEntity.created(new URI(url)).body("{}");
+        return ResponseEntity
+                .created(new URI(url))
+                .body("{}");
     }
 
     @GetMapping("/{adminUserId}")
-    public Optional<AdminUser> getUser(@PathVariable("adminUserId") Long adminUserId) {
+    public Optional<AdminUser> getIndividualAdminUserInfo(
+            @PathVariable("adminUserId") Long adminUserId
+    ) {
         return adminUserService.getAdminUser(adminUserId);
     }
 
     @GetMapping("/list")
-    public List<AdminUser> getUserList() {
+    public List<AdminUser> getAdminUserList() {
         return adminUserService.getAdminUsers();
     }
 
-    @PatchMapping("/{adminUserId}")
-    public ResponseEntity<?> updateUser(
+    @PatchMapping("/{adminUserId}/update")
+    public ResponseEntity<?> updateAdminUserAccount(
             @PathVariable Long adminUserId,
-            @RequestBody AdminUser adminUser
+            @RequestBody AdminUserApiRequest adminUserApiRequest
     ) throws URISyntaxException {
-        // TODO: 어느 어느정보를 수정할 수 있도록 백단을 구성해야 하는가?
-        String url = "/api/admin" + "새로 만들어진 어드민 객체에서 id를 빼서 삽입";
+        AdminUser updatedAdminUser = adminUserService.updateAccount(adminUserId, adminUserApiRequest.getName());
+        String url = "/api/admin" + updatedAdminUser.getId();
+        return ResponseEntity.created(new URI(url)).body("{}");
+    }
+
+    @PatchMapping("/{adminUserId}/interactive")
+    public ResponseEntity<?> interactiveAdminAccount(
+            @PathVariable Long adminUserId
+    ) throws URISyntaxException {
+        AdminUser updatedAdminUser = adminUserService.inactiveUser(adminUserId);
+        String url = "/api/admin" + updatedAdminUser.getId();
         return ResponseEntity.created(new URI(url)).body("{}");
     }
 }

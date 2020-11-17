@@ -37,11 +37,15 @@ public class AdminUserServiceTests {
 
     @Test
     public void 어드민_유저_생성_테스트() {
+        String email = "brandon@naver.com";
+        String password = "asd1234!";
+        String name = "BrandonLee";
+
         AdminUser mockAdminUser = AdminUser.builder()
                 .id(0L)
-                .account("brandon@naver.com")
-                .password("asd1234!")
-                .name("BrandonLee")
+                .account(email)
+                .password(password)
+                .name(name)
                 .status(AdminUserState.ACTIVE)
                 .role(AdminUserRole.SUPER)
                 .lastLoginAt(LocalDateTime.now())
@@ -51,7 +55,7 @@ public class AdminUserServiceTests {
 
         given(adminUserRepository.save(any())).willReturn(mockAdminUser);
 
-        AdminUser adminUser = adminUserService.createAdminUser(mockAdminUser);
+        AdminUser adminUser = adminUserService.createAdminUser(email, password, name);
 
         assertThat(adminUser.getAccount(), is(mockAdminUser.getAccount()));
     }

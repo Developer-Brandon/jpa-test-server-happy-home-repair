@@ -24,7 +24,19 @@ public class AdminUserService {
         this.adminUserRepository = adminUserRepository;
     }
 
-    public AdminUser createAdminUser(AdminUser adminUser) {
+    public AdminUser createAdminUser(String email, String password, String name) {
+
+        AdminUser adminUser = AdminUser.builder()
+                .account(email)
+                .password(password)
+                .name(name)
+                .status(AdminUserState.ACTIVE)
+                .role(AdminUserRole.NORMAL)
+                .lastLoginAt(LocalDateTime.now())
+                .loginFailCount(0)
+                .registeredAt(LocalDateTime.now())
+                .build();
+
         return adminUserRepository.save(adminUser);
     }
 

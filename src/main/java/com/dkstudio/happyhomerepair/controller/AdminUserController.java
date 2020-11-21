@@ -59,7 +59,7 @@ public class AdminUserController {
             @RequestBody AdminUserApiRequest adminUserApiRequest
     ) throws URISyntaxException {
         AdminUser updatedAdminUser = adminUserService.updateAccount(adminUserId, adminUserApiRequest.getName());
-        String url = "/api/admin" + updatedAdminUser.getId();
+        String url = "/api/admin/" + updatedAdminUser.getId();
         return ResponseEntity.created(new URI(url)).body("{}");
     }
 
@@ -67,8 +67,9 @@ public class AdminUserController {
     public ResponseEntity<?> interactiveAdminAccount(
             @PathVariable Long adminUserId
     ) throws URISyntaxException {
+        // Delete User 를 대신 할 api 입니다.
         AdminUser updatedAdminUser = adminUserService.inactiveUser(adminUserId);
-        String url = "/api/admin" + updatedAdminUser.getId();
+        String url = "/api/admin/" + updatedAdminUser.getId();
         return ResponseEntity.created(new URI(url)).body("{}");
     }
 }

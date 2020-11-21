@@ -3,7 +3,6 @@ package com.dkstudio.happyhomerepair.controller;
 import com.dkstudio.happyhomerepair.model.entity.AdminUser;
 import com.dkstudio.happyhomerepair.model.enums.AdminUserRole;
 import com.dkstudio.happyhomerepair.model.enums.AdminUserState;
-import com.dkstudio.happyhomerepair.model.network.request.AdminUserApiRequest;
 import com.dkstudio.happyhomerepair.service.AdminUserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +18,6 @@ import java.util.Optional;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;

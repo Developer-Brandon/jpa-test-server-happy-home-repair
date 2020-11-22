@@ -1,6 +1,6 @@
 package com.dkstudio.happyhomerepair.model.entity;
 
-import com.dkstudio.happyhomerepair.model.enums.AdminUserRole;
+import com.dkstudio.happyhomerepair.model.enums.AdminUserRoleState;
 import com.dkstudio.happyhomerepair.model.enums.AdminUserState;
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -43,7 +43,7 @@ public class AdminUser {
     private AdminUserState status;
 
     @NotNull
-    private AdminUserRole role;
+    private AdminUserRoleState role;
 
     private LocalDateTime lastLoginAt;
 

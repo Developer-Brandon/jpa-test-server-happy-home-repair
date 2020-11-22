@@ -1,6 +1,6 @@
 package com.dkstudio.happyhomerepair.model.entity;
 
-import com.dkstudio.happyhomerepair.model.enums.AdminUserRole;
+import com.dkstudio.happyhomerepair.model.enums.AdminUserRoleState;
 import com.dkstudio.happyhomerepair.model.enums.AdminUserState;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +20,7 @@ public class AdminUserTests {
                 .password("asd1234!")
                 .name("BrandonLee")
                 .status(AdminUserState.ACTIVE)
-                .role(AdminUserRole.SUPER)
+                .role(AdminUserRoleState.SUPER)
                 .lastLoginAt(LocalDateTime.now())
                 .loginFailCount(0)
                 .registeredAt(LocalDateTime.now())

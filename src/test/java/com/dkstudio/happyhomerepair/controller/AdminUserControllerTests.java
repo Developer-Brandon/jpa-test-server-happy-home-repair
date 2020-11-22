@@ -1,7 +1,7 @@
 package com.dkstudio.happyhomerepair.controller;
 
 import com.dkstudio.happyhomerepair.model.entity.AdminUser;
-import com.dkstudio.happyhomerepair.model.enums.AdminUserRole;
+import com.dkstudio.happyhomerepair.model.enums.AdminUserRoleState;
 import com.dkstudio.happyhomerepair.model.enums.AdminUserState;
 import com.dkstudio.happyhomerepair.service.AdminUserService;
 import org.junit.Test;
@@ -46,7 +46,7 @@ public class AdminUserControllerTests {
                 .password(password)
                 .name(name)
                 .status(AdminUserState.ACTIVE)
-                .role(AdminUserRole.NORMAL)
+                .role(AdminUserRoleState.NORMAL)
                 .lastLoginAt(LocalDateTime.now())
                 .loginFailCount(0)
                 .registeredAt(LocalDateTime.now())
@@ -89,7 +89,7 @@ public class AdminUserControllerTests {
                 .password(password)
                 .name(name)
                 .status(AdminUserState.ACTIVE)
-                .role(AdminUserRole.NORMAL)
+                .role(AdminUserRoleState.NORMAL)
                 .lastLoginAt(LocalDateTime.now())
                 .loginFailCount(0)
                 .registeredAt(LocalDateTime.now())
@@ -124,7 +124,7 @@ public class AdminUserControllerTests {
                 .password(password)
                 .name(name)
                 .status(AdminUserState.ACTIVE)
-                .role(AdminUserRole.NORMAL)
+                .role(AdminUserRoleState.NORMAL)
                 .lastLoginAt(LocalDateTime.now())
                 .loginFailCount(0)
                 .registeredAt(LocalDateTime.now())
@@ -163,7 +163,7 @@ public class AdminUserControllerTests {
                 .password(password)
                 .name(name)
                 .status(AdminUserState.INACTIVE)
-                .role(AdminUserRole.NORMAL)
+                .role(AdminUserRoleState.NORMAL)
                 .lastLoginAt(LocalDateTime.now())
                 .loginFailCount(0)
                 .registeredAt(LocalDateTime.now())

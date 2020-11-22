@@ -2,9 +2,10 @@ package com.dkstudio.happyhomerepair.service;
 
 import com.dkstudio.happyhomerepair.model.entity.AdminUser;
 import com.dkstudio.happyhomerepair.model.entity.AdminUserNotFoundException;
-import com.dkstudio.happyhomerepair.model.enums.AdminUserRole;
+import com.dkstudio.happyhomerepair.model.enums.AdminUserRoleState;
 import com.dkstudio.happyhomerepair.model.enums.AdminUserState;
 import com.dkstudio.happyhomerepair.repository.AdminUserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class AdminUserService {
 
@@ -31,7 +33,7 @@ public class AdminUserService {
                 .password(password)
                 .name(name)
                 .status(AdminUserState.ACTIVE)
-                .role(AdminUserRole.NORMAL)
+                .role(AdminUserRoleState.NORMAL)
                 .lastLoginAt(LocalDateTime.now())
                 .loginFailCount(0)
                 .registeredAt(LocalDateTime.now())
@@ -52,7 +54,7 @@ public class AdminUserService {
             Long adminUserId,
             String userName,
             AdminUserState adminUserState,
-            AdminUserRole adminUserRole
+            AdminUserRoleState adminUserRole
     ) {
         return adminUserRepository.findById(adminUserId)
                 .map(adminUserEntity -> {

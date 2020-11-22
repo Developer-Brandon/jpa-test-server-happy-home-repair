@@ -27,7 +27,7 @@ public class BlogPost {
     private String title;
 
     @NotNull
-    private String imageUrl;
+    private String thumbnailImageUrl;
 
     @NotNull
     private String targetUrl;

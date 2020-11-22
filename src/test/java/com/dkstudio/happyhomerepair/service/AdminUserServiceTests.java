@@ -1,7 +1,7 @@
 package com.dkstudio.happyhomerepair.service;
 
 import com.dkstudio.happyhomerepair.model.entity.AdminUser;
-import com.dkstudio.happyhomerepair.model.enums.AdminUserRole;
+import com.dkstudio.happyhomerepair.model.enums.AdminUserRoleState;
 import com.dkstudio.happyhomerepair.model.enums.AdminUserState;
 import com.dkstudio.happyhomerepair.repository.AdminUserRepository;
 import org.junit.Before;
@@ -47,7 +47,7 @@ public class AdminUserServiceTests {
                 .password(password)
                 .name(name)
                 .status(AdminUserState.ACTIVE)
-                .role(AdminUserRole.SUPER)
+                .role(AdminUserRoleState.SUPER)
                 .lastLoginAt(LocalDateTime.now())
                 .loginFailCount(0)
                 .registeredAt(LocalDateTime.now())
@@ -68,7 +68,7 @@ public class AdminUserServiceTests {
                 .password("asd1234!")
                 .name("BrandonLee")
                 .status(AdminUserState.ACTIVE)
-                .role(AdminUserRole.SUPER)
+                .role(AdminUserRoleState.SUPER)
                 .lastLoginAt(LocalDateTime.now())
                 .loginFailCount(0)
                 .registeredAt(LocalDateTime.now())
@@ -89,7 +89,7 @@ public class AdminUserServiceTests {
                 .password("asd1234!")
                 .name("BrandonLee")
                 .status(AdminUserState.ACTIVE)
-                .role(AdminUserRole.SUPER)
+                .role(AdminUserRoleState.SUPER)
                 .lastLoginAt(LocalDateTime.now())
                 .loginFailCount(0)
                 .registeredAt(LocalDateTime.now())
@@ -127,7 +127,7 @@ public class AdminUserServiceTests {
                 .password("asd1234!")
                 .name("BrandonLee")
                 .status(AdminUserState.ACTIVE)
-                .role(AdminUserRole.SUPER)
+                .role(AdminUserRoleState.SUPER)
                 .lastLoginAt(LocalDateTime.now())
                 .loginFailCount(0)
                 .registeredAt(LocalDateTime.now())
@@ -141,12 +141,12 @@ public class AdminUserServiceTests {
                 0L,
                 "BruceLee",
                 AdminUserState.ACTIVE,
-                AdminUserRole.SUPER
+                AdminUserRoleState.SUPER
         );
 
         assertThat(mockAdminUser.getName(), is("BruceLee"));
         assertThat(mockAdminUser.getStatus(), is(AdminUserState.ACTIVE));
-        assertThat(mockAdminUser.getRole(), is(AdminUserRole.SUPER));
+        assertThat(mockAdminUser.getRole(), is(AdminUserRoleState.SUPER));
     }
 
     @Test
@@ -157,7 +157,7 @@ public class AdminUserServiceTests {
                 .password("asd1234!")
                 .name("BrandonLee")
                 .status(AdminUserState.ACTIVE)
-                .role(AdminUserRole.SUPER)
+                .role(AdminUserRoleState.SUPER)
                 .lastLoginAt(LocalDateTime.now())
                 .loginFailCount(0)
                 .registeredAt(LocalDateTime.now())
@@ -171,12 +171,12 @@ public class AdminUserServiceTests {
                 1L,
                 "BruceLee",
                 AdminUserState.ACTIVE,
-                AdminUserRole.SUPER
+                AdminUserRoleState.SUPER
         );
 
         assertThat(mockAdminUser.getName(), is("BruceLee"));
         assertThat(mockAdminUser.getStatus(), is(AdminUserState.ACTIVE));
-        assertThat(mockAdminUser.getRole(), is(AdminUserRole.SUPER));
+        assertThat(mockAdminUser.getRole(), is(AdminUserRoleState.SUPER));
     }
 
     @Test
@@ -187,7 +187,7 @@ public class AdminUserServiceTests {
                 .password("asd1234!")
                 .name("BrandonLee")
                 .status(AdminUserState.ACTIVE)
-                .role(AdminUserRole.SUPER)
+                .role(AdminUserRoleState.SUPER)
                 .lastLoginAt(LocalDateTime.now())
                 .loginFailCount(0)
                 .registeredAt(LocalDateTime.now())
@@ -212,7 +212,7 @@ public class AdminUserServiceTests {
                 .password("asd1234!")
                 .name("BrandonLee")
                 .status(AdminUserState.ACTIVE)
-                .role(AdminUserRole.SUPER)
+                .role(AdminUserRoleState.SUPER)
                 .lastLoginAt(LocalDateTime.now())
                 .loginFailCount(0)
                 .registeredAt(LocalDateTime.now())
@@ -237,7 +237,7 @@ public class AdminUserServiceTests {
                 .password("asd1234!")
                 .name("BrandonLee")
                 .status(AdminUserState.ACTIVE)
-                .role(AdminUserRole.SUPER)
+                .role(AdminUserRoleState.SUPER)
                 .lastLoginAt(LocalDateTime.now())
                 .loginFailCount(0)
                 .registeredAt(LocalDateTime.now())
@@ -259,7 +259,7 @@ public class AdminUserServiceTests {
                 .password("asd1234!")
                 .name("BrandonLee")
                 .status(AdminUserState.ACTIVE)
-                .role(AdminUserRole.SUPER)
+                .role(AdminUserRoleState.SUPER)
                 .lastLoginAt(LocalDateTime.now())
                 .loginFailCount(0)
                 .registeredAt(LocalDateTime.now())

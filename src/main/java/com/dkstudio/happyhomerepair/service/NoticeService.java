@@ -1,5 +1,9 @@
 package com.dkstudio.happyhomerepair.service;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+@Slf4j
+@Service
 public class NoticeService {
-    // 본격 게시판 만들기
 }

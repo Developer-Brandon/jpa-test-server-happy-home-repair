@@ -19,27 +19,22 @@ public class BlogPostService {
         this.blogPostRepository = blogPostRepository;
     }
 
-    // TODO: 개별 블로그 포스트 등록
     public BlogPost createBlogPost(BlogPost blogPost) {
         return blogPostRepository.save(blogPost);
     }
 
-    // TODO: 블로그 포스트에 해당하는 목록들 등록
-    public List<BlogPost> createBlogPostList(List<BlogPost> blogPostList) {
-        return null;
+    public void createBlogPostList(List<BlogPost> blogPostList) {
+        blogPostList.forEach(this::createBlogPost);
     }
 
-    // TODO: 블로그 포슽에 해당하는 목록들 조회(개별조회는 필요없음)
     public List<BlogPost> getBlogPostList() {
         return null;
     }
 
-    // TODO: 개별 블로그 포스트 수정
     public BlogPost updateBlogPost(BlogPost blogPost) {
         return null;
     }
 
-    // TODO: 블로그 포스트에 해당하는 목록들 삭제
     public BlogPost deleteBlogPost(BlogPost blogPost) {
         return null;
     }

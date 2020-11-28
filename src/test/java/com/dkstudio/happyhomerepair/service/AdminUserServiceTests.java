@@ -1,11 +1,14 @@
 package com.dkstudio.happyhomerepair.service;
 
 import com.dkstudio.happyhomerepair.model.entity.AdminUser;
+import com.dkstudio.happyhomerepair.model.entity.AdminUserNotFoundException;
 import com.dkstudio.happyhomerepair.model.enums.AdminUserRoleState;
 import com.dkstudio.happyhomerepair.model.enums.AdminUserState;
 import com.dkstudio.happyhomerepair.repository.AdminUserRepository;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -28,6 +31,9 @@ public class AdminUserServiceTests {
 
     @Mock
     private AdminUserRepository adminUserRepository;
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @Before
     public void 초기화() {
@@ -151,35 +157,18 @@ public class AdminUserServiceTests {
 
     @Test
     public void 어드민_유저_정보_수정_실패_할_경우_테스트() {
-        AdminUser mockAdminUser = AdminUser.builder()
-                .id(0L)
-                .account("brandon@naver.com")
-                .password("asd1234!")
-                .name("BrandonLee")
-                .status(AdminUserState.ACTIVE)
-                .role(AdminUserRoleState.SUPER)
-                .lastLoginAt(LocalDateTime.now())
-                .loginFailCount(0)
-                .registeredAt(LocalDateTime.now())
-                .build();
+        long testId = 1L;
 
-
-        given(adminUserRepository.findById(0L))
-                .willReturn(Optional.ofNullable(mockAdminUser));
+        expectedException.expect(AdminUserNotFoundException.class);
 
         adminUserService.updateInformation(
-                1L,
+                testId,
                 "BruceLee",
                 AdminUserState.ACTIVE,
                 AdminUserRoleState.SUPER
         );
-
-        assertThat(mockAdminUser.getName(), is("BruceLee"));
-        assertThat(mockAdminUser.getStatus(), is(AdminUserState.ACTIVE));
-        assertThat(mockAdminUser.getRole(), is(AdminUserRoleState.SUPER));
     }
 
-    @Test
     public void 어드민_유저_이메일_수정_성공_테스트() {
         AdminUser mockAdminUser = AdminUser.builder()
                 .id(0L)
@@ -205,31 +194,6 @@ public class AdminUserServiceTests {
     }
 
     @Test
-    public void 어드민_유저_이메일_수정_실패_테스트() {
-        AdminUser mockAdminUser = AdminUser.builder()
-                .id(0L)
-                .account("brandon@naver.com")
-                .password("asd1234!")
-                .name("BrandonLee")
-                .status(AdminUserState.ACTIVE)
-                .role(AdminUserRoleState.SUPER)
-                .lastLoginAt(LocalDateTime.now())
-                .loginFailCount(0)
-                .registeredAt(LocalDateTime.now())
-                .build();
-
-        given(adminUserRepository.findById(0L))
-                .willReturn(Optional.ofNullable(mockAdminUser));
-
-        adminUserService.updateAccount(
-                1L,
-                "singLung"
-        );
-
-        assertThat(mockAdminUser.getAccount(), is("singLung"));
-    }
-
-    @Test
     public void 어드민_유저_비활성화_성공_테스트() {
         AdminUser mockAdminUser = AdminUser.builder()
                 .id(0L)
@@ -247,28 +211,6 @@ public class AdminUserServiceTests {
                 .willReturn(Optional.ofNullable(mockAdminUser));
 
         AdminUser inActivedUser = adminUserService.inactiveUser(0L);
-
-        assertThat(inActivedUser.getStatus(), is(AdminUserState.INACTIVE));
-    }
-
-    @Test
-    public void 어드민_유저_비활성화_실패_테스트() {
-        AdminUser mockAdminUser = AdminUser.builder()
-                .id(0L)
-                .account("brandon@naver.com")
-                .password("asd1234!")
-                .name("BrandonLee")
-                .status(AdminUserState.ACTIVE)
-                .role(AdminUserRoleState.SUPER)
-                .lastLoginAt(LocalDateTime.now())
-                .loginFailCount(0)
-                .registeredAt(LocalDateTime.now())
-                .build();
-
-        given(adminUserRepository.findById(0L))
-                .willReturn(Optional.ofNullable(mockAdminUser));
-
-        AdminUser inActivedUser = adminUserService.inactiveUser(1L);
 
         assertThat(inActivedUser.getStatus(), is(AdminUserState.INACTIVE));
     }

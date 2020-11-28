@@ -1,7 +1,7 @@
 package com.dkstudio.happyhomerepair.service;
 
 import com.dkstudio.happyhomerepair.model.entity.BlogPost;
-import com.dkstudio.happyhomerepair.model.entity.BlogPostNotFoundExcption;
+import com.dkstudio.happyhomerepair.model.entity.BlogPostNotFoundException;
 import com.dkstudio.happyhomerepair.repository.BlogPostRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +44,7 @@ public class BlogPostService {
                             .setTargetUrl(targetUrl);
                     return blogPostEntity;
                 })
-                .orElseThrow(() -> new BlogPostNotFoundExcption(blogPostId));
+                .orElseThrow(() -> new BlogPostNotFoundException(blogPostId));
     }
 
     public void deleteBlogPost(

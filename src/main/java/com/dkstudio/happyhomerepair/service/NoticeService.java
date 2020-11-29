@@ -44,15 +44,14 @@ public class NoticeService {
     public Notice updateNotice(
             Long noticeId,
             String title,
-            String content,
-            LocalDateTime updatedDate
+            String content
     ) {
         return noticeRepository.findById(noticeId)
                 .map(noticeEntity -> {
                     noticeEntity
                             .setTitle(title)
                             .setContent(content)
-                            .setUpdatedAt(updatedDate);
+                            .setUpdatedAt(LocalDateTime.now());
                     return noticeEntity;
                 })
                 .orElseThrow(() -> new NoticeNotFoundException(noticeId));

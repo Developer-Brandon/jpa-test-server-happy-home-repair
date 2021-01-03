@@ -2,6 +2,7 @@ package com.dkstudio.happyhomerepair.service;
 
 import com.dkstudio.happyhomerepair.model.entity.BlogPost;
 import com.dkstudio.happyhomerepair.repository.BlogPostRepository;
+import com.dkstudio.happyhomerepair.service.impl.BlogPostService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

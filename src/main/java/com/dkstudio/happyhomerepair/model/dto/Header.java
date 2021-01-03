@@ -1,4 +1,4 @@
-package com.dkstudio.happyhomerepair.model.network;
+package com.dkstudio.happyhomerepair.model.dto;
 
 import javafx.scene.control.Pagination;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.dkstudio.happyhomerepair.service;
+package com.dkstudio.happyhomerepair.service.impl;
 
 import com.dkstudio.happyhomerepair.model.entity.AdminUser;
 import com.dkstudio.happyhomerepair.model.entity.AdminUserNotFoundException;

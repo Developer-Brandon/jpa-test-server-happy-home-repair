@@ -1,4 +1,4 @@
-package com.dkstudio.happyhomerepair.service;
+package com.dkstudio.happyhomerepair.service.impl;
 
 import com.dkstudio.happyhomerepair.model.entity.BlogPost;
 import com.dkstudio.happyhomerepair.model.entity.BlogPostNotFoundException;

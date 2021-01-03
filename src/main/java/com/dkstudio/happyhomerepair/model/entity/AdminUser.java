@@ -23,7 +23,7 @@ import java.util.List;
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = {"noticeList", "blogPostList"})
+@ToString(exclude = {"blogPostList"})
 @EntityListeners(AuditingEntityListener.class)
 public class AdminUser {
     @Id
@@ -71,9 +71,6 @@ public class AdminUser {
 
     @LastModifiedBy
     private String updatedBy;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "adminUser")
-    private List<Notice> noticeList;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "adminUser")
     private List<BlogPost> blogPostList;

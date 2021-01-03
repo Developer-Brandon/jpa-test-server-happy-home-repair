@@ -3,7 +3,7 @@ package com.dkstudio.happyhomerepair.controller;
 import com.dkstudio.happyhomerepair.model.entity.AdminUser;
 import com.dkstudio.happyhomerepair.model.enums.AdminUserRoleState;
 import com.dkstudio.happyhomerepair.model.enums.AdminUserState;
-import com.dkstudio.happyhomerepair.service.AdminUserService;
+import com.dkstudio.happyhomerepair.service.impl.AdminUserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

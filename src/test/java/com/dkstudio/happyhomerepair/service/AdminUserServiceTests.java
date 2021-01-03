@@ -5,6 +5,7 @@ import com.dkstudio.happyhomerepair.model.entity.AdminUserNotFoundException;
 import com.dkstudio.happyhomerepair.model.enums.AdminUserRoleState;
 import com.dkstudio.happyhomerepair.model.enums.AdminUserState;
 import com.dkstudio.happyhomerepair.repository.AdminUserRepository;
+import com.dkstudio.happyhomerepair.service.impl.AdminUserService;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

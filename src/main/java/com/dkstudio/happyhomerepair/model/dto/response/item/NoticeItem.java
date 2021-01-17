@@ -14,6 +14,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NoticeItem {
+
     @NotNull
     private Long beforeNoticeId;
 

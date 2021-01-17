@@ -1,22 +1,22 @@
 package com.dkstudio.happyhomerepair.service.impl;
 
 import com.dkstudio.happyhomerepair.exception.CantFindDataException;
-import com.dkstudio.happyhomerepair.model.dao.impl.NoticeDAOImpl;
+import com.dkstudio.happyhomerepair.model.dao.NoticeDAO;
 import com.dkstudio.happyhomerepair.model.dto.response.item.NoticeItem;
 import com.dkstudio.happyhomerepair.model.dto.common.NoticeDTO;
 import com.dkstudio.happyhomerepair.model.dto.response.NoticeListResponseDTO;
 import com.dkstudio.happyhomerepair.model.dto.response.NoticeResponseDTO;
 import com.dkstudio.happyhomerepair.service.NoticeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.inject.Inject;
 import java.util.Optional;
 
 @Service
 public class NoticeServiceImpl implements NoticeService{
 
-    @Inject
-    NoticeDAOImpl noticeDAO;
+    @Autowired
+    NoticeDAO noticeDAO;
 
     @Override
     public NoticeResponseDTO selectNotice(Long id) {
@@ -40,11 +40,9 @@ public class NoticeServiceImpl implements NoticeService{
 
     @Override
     public void updateNotice(NoticeDTO noticeDTO) {
-        noticeDAO.updateNotice(noticeDTO);
     }
 
     @Override
     public void deleteNotice(Long id) {
-        noticeDAO.deleteNotice(id);
     }
 }

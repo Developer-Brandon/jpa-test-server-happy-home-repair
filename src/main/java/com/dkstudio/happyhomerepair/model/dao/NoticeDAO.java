@@ -1,14 +1,34 @@
 package com.dkstudio.happyhomerepair.model.dao;
 
-import com.dkstudio.happyhomerepair.model.dto.common.NoticeDTO;
 import com.dkstudio.happyhomerepair.model.dto.response.item.NoticeItem;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import javax.annotation.Resource;
 
-public interface NoticeDAO {
-    NoticeItem selectNotice(Long id);
-    List<Object> selectNoticeList();
-    void insertNotice(Long noticeDTO);
-    void updateNotice(NoticeDTO noticeDTO);
-    void deleteNotice(Long id);
+@Repository
+public class NoticeDAO {
+
+    @Resource
+    SqlSession sqlSession;
+
+    public NoticeItem selectNotice(Long id) {
+        return sqlSession.selectOne(  "selectNotice", id);
+    }
+
+//    public List<Object> selectNoticeList() {
+//        return sqlSessionTemplate.selectList(MAPPER_NAME + "selectNoticeList");
+//    }
+//
+//    public void insertNotice(Long noticeDTO) {
+//        sqlSessionTemplate.insert(MAPPER_NAME + "insertNotice", noticeDTO);
+//    }
+//
+//    public void updateNotice(NoticeDTO noticeDTO) {
+//        sqlSessionTemplate.update(MAPPER_NAME + "updateNotice", noticeDTO);
+//    }
+//
+//    public void deleteNotice(Long id) {
+//        sqlSessionTemplate.delete(MAPPER_NAME + "deleteNotice", id);
+//    }
 }

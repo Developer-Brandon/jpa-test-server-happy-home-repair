@@ -2,13 +2,27 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="notice">
+<mapper namespace="NoticeDAOImpl">
     <select id="selectNotice"
             parameterType="Long"
-            resultType="com.dkstudio.happyhomerepair.model.dto.common.NoticeDTO">
-      SELECT * FROM TB_NOTICE WHERE id = #{id};
+            resultType="com.dkstudio.happyhomerepair.model.dto.response.item.NoticeItem">
+        SELECT
+            (SELECT id FROM TB_NOTICE WHERE #{id} <![CDATA[ < ]]> 2 ORDER BY id DESC limit 1) AS beforeNoticeId,
+            id AS currentNoticeId,
+            (SELECT id FROM TB_NOTICE WHERE #{id} <![CDATA[ > ]]> 2 ORDER BY id limit 1) AS nextNoticeId,
+            title AS noticeTitle,
+            contents AS noticeContents,
+            created_by AS createdBy,
+            registered_at AS noticeRegisteredDate
+            FROM TB_NOTICE
+            WHERE
+              id = #{id};
     </select>
-    <!--<insert id=""></insert>-->
-    <!--<update id=""></update>-->
-    <!--<delete id=""></delete>-->
+     <select
+             id="selectNoticeList"
+             resultType="com.dkstudio.happyhomerepair.model.dto.response.NoticeResponseDTO">
+     </select>
+    <!--<insert id="insertNotice"></insert>-->
+    <!--<update id="updateNotice"></update>-->
+    <!--<delete id="deleteNotice"></delete>-->
 </mapper>

@@ -2,40 +2,45 @@ package com.dkstudio.happyhomerepair.model.dao.impl;
 
 import com.dkstudio.happyhomerepair.model.dao.NoticeDAO;
 import com.dkstudio.happyhomerepair.model.dto.common.NoticeDTO;
+import com.dkstudio.happyhomerepair.model.dto.response.NoticeResponseDTO;
+import com.dkstudio.happyhomerepair.model.dto.response.item.NoticeItem;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.Optional;
 
-@Repository
-public class NoticeDAOImpl implements NoticeDAO{
+@Slf4j
+@Repository("NoticeDAOImpl")
+public class NoticeDAOImpl implements NoticeDAO {
 
     @Inject
     SqlSession sqlSession;
 
     @Override
-    public NoticeDTO selectNotice(Long id) {
-        return sqlSession.selectOne("notice.selectNotice", id);
+    public NoticeItem selectNotice(Long id) {
+        return sqlSession.selectOne("selectNotice", id);
     }
 
     @Override
-    public List<NoticeDTO> selectNoticeList() {
-        return sqlSession.selectList("notice.selectNoticeList");
+    public List<Object> selectNoticeList() {
+        return sqlSession.selectList("selectNoticeList");
     }
 
     @Override
     public void insertNotice(Long noticeDTO) {
-        sqlSession.insert("notice.insertNotice", noticeDTO);
+        sqlSession.insert("insertNotice", noticeDTO);
     }
 
     @Override
     public void updateNotice(NoticeDTO noticeDTO) {
-        sqlSession.update("notice.updateNotice", noticeDTO);
+        sqlSession.update("updateNotice", noticeDTO);
     }
 
     @Override
     public void deleteNotice(Long id) {
-        sqlSession.delete("notice.deleteNotice", id);
+        sqlSession.delete("deleteNotice", id);
     }
 }

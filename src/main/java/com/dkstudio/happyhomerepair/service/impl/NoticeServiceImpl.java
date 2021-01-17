@@ -1,6 +1,8 @@
 package com.dkstudio.happyhomerepair.service.impl;
 
+import com.dkstudio.happyhomerepair.exception.CantFindDataException;
 import com.dkstudio.happyhomerepair.model.dao.impl.NoticeDAOImpl;
+import com.dkstudio.happyhomerepair.model.dto.response.item.NoticeItem;
 import com.dkstudio.happyhomerepair.model.dto.common.NoticeDTO;
 import com.dkstudio.happyhomerepair.model.dto.response.NoticeListResponseDTO;
 import com.dkstudio.happyhomerepair.model.dto.response.NoticeResponseDTO;
@@ -8,6 +10,7 @@ import com.dkstudio.happyhomerepair.service.NoticeService;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.Optional;
 
 @Service
 public class NoticeServiceImpl implements NoticeService{
@@ -17,13 +20,17 @@ public class NoticeServiceImpl implements NoticeService{
 
     @Override
     public NoticeResponseDTO selectNotice(Long id) {
-        NoticeDTO selectedNotice = noticeDAO.selectNotice(id);
-        return NoticeResponseDTO.builder()
-                .currentNoticeId(selectedNotice.getId())
-                .noticeTitle(selectedNotice.getTitle())
-                .noticeContents(selectedNotice.getContent())
-                .noticeRegisteredDate(selectedNotice.getRegisteredAt())
-                .build();
+        NoticeResponseDTO noticeResponseDTO = NoticeResponseDTO.builder().build();
+        try {
+            NoticeItem noticeItem =
+                    Optional
+                        .ofNullable(noticeDAO.selectNotice(id))
+                        .orElseThrow(CantFindDataException::new);
+            noticeResponseDTO.setNoticeItem(noticeItem);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return noticeResponseDTO;
     }
 
     @Override

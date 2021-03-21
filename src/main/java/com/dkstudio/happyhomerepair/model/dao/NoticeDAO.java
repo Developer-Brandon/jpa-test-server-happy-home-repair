@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Repository
 public class NoticeDAO {
@@ -16,9 +17,9 @@ public class NoticeDAO {
         return sqlSession.selectOne(  "selectNotice", id);
     }
 
-//    public List<Object> selectNoticeList() {
-//        return sqlSessionTemplate.selectList(MAPPER_NAME + "selectNoticeList");
-//    }
+    public List<NoticeItem> selectNoticeList() {
+        return sqlSession.selectList("selectNoticeList");
+    }
 //
 //    public void insertNotice(Long noticeDTO) {
 //        sqlSessionTemplate.insert(MAPPER_NAME + "insertNotice", noticeDTO);

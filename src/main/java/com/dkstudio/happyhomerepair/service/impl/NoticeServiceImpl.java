@@ -1,6 +1,6 @@
 package com.dkstudio.happyhomerepair.service.impl;
 
-import com.dkstudio.happyhomerepair.exception.CantFindDataException;
+import com.dkstudio.happyhomerepair.exception.common.CantFindDataException;
 import com.dkstudio.happyhomerepair.model.dao.NoticeDAO;
 import com.dkstudio.happyhomerepair.model.dto.response.item.NoticeItem;
 import com.dkstudio.happyhomerepair.model.dto.common.NoticeDTO;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class NoticeServiceImpl implements NoticeService{
+public class NoticeServiceImpl implements NoticeService {
 
     @Autowired
     NoticeDAO noticeDAO;
@@ -24,8 +24,8 @@ public class NoticeServiceImpl implements NoticeService{
         try {
             NoticeItem noticeItem =
                     Optional
-                        .ofNullable(noticeDAO.selectNotice(id))
-                        .orElseThrow(CantFindDataException::new);
+                            .ofNullable(noticeDAO.selectNotice(id))
+                            .orElseThrow(CantFindDataException::new);
             noticeResponseDTO.setNoticeItem(noticeItem);
         } catch (Exception e) {
             e.printStackTrace();
@@ -35,6 +35,11 @@ public class NoticeServiceImpl implements NoticeService{
 
     @Override
     public NoticeListResponseDTO selectNoticeList() {
+        try {
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
 

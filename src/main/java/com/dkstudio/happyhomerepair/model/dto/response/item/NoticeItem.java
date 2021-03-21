@@ -1,12 +1,17 @@
 package com.dkstudio.happyhomerepair.model.dto.response.item;
 
 
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
 
 @Data
 @Builder
@@ -15,24 +20,25 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 public class NoticeItem {
 
-    @NotNull
-    private Long beforeNoticeId;
+    @PositiveOrZero
+    long beforeNoticeId;
 
-    @NotNull
-    private Long nextNoticeId;
+    @PositiveOrZero
+    long nextNoticeId;
 
-    @NotNull
-    private Long currentNoticeId;
+    @PositiveOrZero
+    long currentNoticeId;
 
-    @NotNull
-    private String noticeTitle;
+    @NotBlank
+    String noticeTitle;
 
-    @NotNull
-    private String noticeContents;
+    @NotBlank
+    String noticeContents;
 
-    @NotNull
-    private String createdBy;
+    @NotBlank
+    String createdBy;
 
-    @NotNull
-    private String noticeRegisteredDate;
+    @NotBlank
+    @PastOrPresent
+    String noticeRegisteredDate;
 }

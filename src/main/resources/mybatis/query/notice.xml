@@ -2,27 +2,42 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="ccom.dkstudio.happyhomerepair.model.dao.impl.NoticeDAO">
+<mapper namespace="com.dkstudio.happyhomerepair.model.dao.impl.NoticeDAO">
+
+    <!-- 공지사항 리스트 -->
+    <select id="selectNoticeList"
+            resultType="com.dkstudio.happyhomerepair.model.dto.response.item.NoticeItem">
+            SELECT
+              id AS noticeId,
+              title AS noticeTitle,
+              contents AS noticeContents,
+              created_at AS noticeCreatedAt
+            FROM TB_NOTICE
+            ORDER BY noticeId DESC;
+    </select>
+
+    <!-- 공지사항 상세 -->
     <select id="selectNotice"
             parameterType="Long"
             resultType="com.dkstudio.happyhomerepair.model.dto.response.item.NoticeItem">
-        SELECT
-            (SELECT id FROM TB_NOTICE WHERE id <![CDATA[ < ]]> #{id} ORDER BY id DESC limit 1) AS beforeNoticeId,
-            id AS currentNoticeId,
-            (SELECT id FROM TB_NOTICE WHERE id <![CDATA[ > ]]> #{id} ORDER BY id limit 1) AS nextNoticeId,
-            title AS noticeTitle,
-            contents AS noticeContents,
-            created_by AS createdBy,
-            registered_at AS noticeRegisteredDate
+            SELECT
+                (SELECT id FROM TB_NOTICE WHERE id <![CDATA[ < ]]> #{id} ORDER BY id DESC limit 1) AS beforeNoticeId,
+                id AS currentNoticeId,
+                (SELECT id FROM TB_NOTICE WHERE id <![CDATA[ > ]]> #{id} ORDER BY id limit 1) AS nextNoticeId,
+                title AS noticeTitle,
+                contents AS noticeContents,
+                created_by AS createdBy,
+                registered_at AS noticeRegisteredDate
             FROM TB_NOTICE
-            WHERE
-              id = #{id};
+            WHERE id = #{id};
     </select>
-     <!--<select-->
-             <!--id="selectNoticeList"-->
-             <!--resultType="com.dkstudio.happyhomerepair.model.dto.response.NoticeResponseDTO">-->
-     <!--</select>-->
+
+    <!-- 공지사항 삽입 -->
     <!--<insert id="insertNotice"></insert>-->
+
+    <!-- 공지사항 수정 -->
     <!--<update id="updateNotice"></update>-->
+
+    <!-- 공지사항 삭제 -->
     <!--<delete id="deleteNotice"></delete>-->
 </mapper>
